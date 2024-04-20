@@ -46,3 +46,10 @@ No more room for errors, just efficient attendance management.*
 - *leveraging cutting-edge APIs like Vertex and Gemini.*
 - *While integrating Face-Recognition for attendance management.*
 
+
+
+## *Buisness Model* - 
+
+- *Sponsorships and Partnerships: Collaborate with government agencies, NGOs, corporate sponsors, and educational institutions to sponsor youth programs, workshops, and community projects on the platform.*
+- *Advertising and Sponsorship: Generate revenue through targeted advertising and sponsorship opportunities, showcasing products and services relevant to youth audiences.*
+- *Membership Fees: Offer subscription-based access to premium features and services on the platform for Schools.*
