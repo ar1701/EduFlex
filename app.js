@@ -152,6 +152,9 @@ app.get("/main", isLoggedIn, (req,res)=>{
 app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
+app.get("/grading",isLoggedIn, (req, res) => {
+  res.render("grading.ejs");
+});
 
 app.post(
   "/login",
