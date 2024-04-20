@@ -1,4 +1,5 @@
-# Unleash the Power of *EduFlex* - One Platform for Schools and Students
+# Unleash the Power of *EduFlex* - One Platform for Schools and Students 
+![EduFlex_LOGO](CodeCrew,jpg.jpeg)
 
 *Imagine a platform that revolutionizes education, empowering schools and students to thrive in the ever-evolving world. This is not a dream; it's the reality we're building with our innovative website!*
 
