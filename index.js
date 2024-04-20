@@ -86,4 +86,4 @@ async function chatBot() {
   askAndRespond();
 }
 
-// chatBot();
+chatBot();
