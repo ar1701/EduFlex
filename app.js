@@ -278,7 +278,7 @@ app.get('/logout', function(req, res){
   });
 });
 
-app.all("*", isLoggedIn, (req, res, next) => {
+app.all("*",  (req, res, next) => {
   res.redirect("/index");
 });
 
