@@ -5,8 +5,10 @@ if(process.env.NODE_ENV != "production") {
 const cloudinary = require("cloudinary").v2;
 const express = require("express");
 const app = express();
+
 const mongoose = require("mongoose");
 const path = require("path");
+const axios = require('axios');
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const User = require("./model/user.js");
@@ -22,6 +24,22 @@ const { isLoggedIn } = require("./middleware.js");
 const multer = require("multer");
 
 const dbUrl = process.env.ATLASDB_URL;
+// const { storage } = require("./cloudConfig.js");
+
+async function extractImage(url) {
+  try {
+      const response = await axios({
+          method: 'GET',
+          url: url,
+          responseType: 'arraybuffer'
+      });
+      return response.data;
+  } catch (error) {
+      console.error('Error extracting image:', error);
+      throw error;
+  }
+}
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -145,7 +163,7 @@ app.get("/chat", isLoggedIn, (req,res)=>{
   res.render("chat.ejs");
 });
 
-app.get("/main", isLoggedIn, (req,res)=>{
+app.get("/main", (req,res)=>{
   res.render("main.ejs");
 });
 
@@ -240,6 +258,7 @@ app.post('/form', isLoggedIn, upload.single('image'), async (req, res) => {
       const response = await result.response;
       const text = response.text();
       res.json({ result: text });
+      return text;
   } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal server error' });
