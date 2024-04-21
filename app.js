@@ -322,7 +322,7 @@ async function textQuery(query) {
 
 async function syllabusGen(std, sub) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-  const prompt = `Generate the Syllabus of ${std} for the subject ${sub} based on current National Educational Policy.`;
+  const prompt = `Generate the Syllabus of ${std} for the subject ${sub} based on current National Educational Policy and always keep in mind the class of a student.Only generate the syllabus according the class age.`;
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
