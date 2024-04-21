@@ -49,6 +49,12 @@ No more room for errors, just efficient attendance management.
 - *leveraging cutting-edge APIs like Vertex and Gemini.*
 - *While integrating Face-Recognition for attendance management.*
 
+## *Technologies & Tools Used -*
+- *Frontend: HTML, CSS, JavaScript*
+- *Backend: NodeJS, ExpressJS, MongoDB Atlas*
+- *Framework: BootStrap, ejs*
+- *Deployment: Render*
+- *Google Tools: Vertex AI, Gemini(API)*
 
 
 ## *Buisness Model* - 
