@@ -212,36 +212,45 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/syllabus", isLoggedIn, async(req,res)=>{
-  let {std, subject} = req.body;
-  let result = await syllabusGen(std, subject);
-  res.render("syl.ejs", { result });
+app.post("/syllabus", isLoggedIn, async (req, res) => {
+  try {
+      let { std, subject } = req.body;
+      let result = await syllabusGen(std, subject);
+      res.render("syl.ejs", { result });
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).send("Internal Server Error");
+  }
 });
 
-app.post("/ask", isLoggedIn, async(req,res)=>{
-  let {question} = req.body;
-  let result = await textQuery(question);
-  res.render("ask2.ejs", { result });
+
+app.post("/ask", isLoggedIn, async (req, res) => {
+  try {
+      let { question } = req.body;
+      let result = await textQuery(question);
+      res.render("ask2.ejs", { result });
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).send("Internal Server Error");
+  }
 });
+
 
 app.post("/chat", isLoggedIn, async (req, res) => {
   try {
-      // Extract the user message from the request body
       const userInput = req.body.message;
-
-      // Generate a response from the chatbot model
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContent(userInput);
       const response = await result.response;
       const text = response.text();
 
-      // Send the response back to the client
-      res.json({ message: text });
+      res.json({ message: text }); // Response sent here
   } catch (error) {
       console.error("Error:", error);
-      res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).json({ message: "Internal Server Error" }); // Fallback response
   }
 });
+
 
 app.post('/form', isLoggedIn, upload.single('image'), async (req, res) => {
   try {
@@ -257,30 +266,31 @@ app.post('/form', isLoggedIn, upload.single('image'), async (req, res) => {
       const result = await model.generateContent([prompt, ...imageParts]);
       const response = await result.response;
       const text = response.text();
-      res.json({ result: text });
-      return text;
+
+      res.json({ result: text }); // Sends JSON response
   } catch (error) {
       console.error('Error:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' }); // Error response
   }
 });
 
+
 // Set up a route for logging out
-app.get('/logout', function(req, res){
-  // Attach a logout handler
-  req.logout(function(err) {
+app.get('/logout', (req, res, next) => {
+  req.logout(function (err) {
       if (err) {
           console.error("Error logging out:", err);
-          return next(err);
+          return next(err); // Forward the error to the error handler
       }
-      // Redirect the user to a specific page after logout
-      res.redirect('/main'); // Redirect to homepage or any other page after logout
+      res.redirect('/main'); // Only one response
   });
 });
 
-app.all("*",  (req, res, next) => {
+
+app.all("*", (req, res) => {
   res.redirect("/index");
 });
+
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
