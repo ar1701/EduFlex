@@ -245,7 +245,7 @@ app.post("/chat", isLoggedIn, async (req, res) => {
 
 app.post('/form', isLoggedIn, upload.single('image'), async (req, res) => {
   try {
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
       const prompt = '';
       const imageParts = [{
           inlineData: {
@@ -300,7 +300,7 @@ function fileToGenerativePart(path, mimeType) {
 }
 
 async function problemSolving() {
-  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const prompt = "";
   const imageParts = [
       fileToGenerativePart("prob.jpg", "image/jpeg"),
